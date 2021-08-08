@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+
+    {% for message in messages %}
+        <h2 class="register_error">{{ message }}</h2>
+    {% endfor %}
+    <form action="/login/" method="post">
+        {% csrf_token %}
+        <div class="wrapper-login">
+            <div class="login_elements">
+
+                <h1 class="login">LOGIN</h1>
+
+                <label for=".username">Username: </label>
+                <input type="text" class="username" name="username" maxlength="22"><br>
+                <label for=".password">Password:</label>
+                <input type="password" class="password second_pw" name="password"><br>
+                <button type="submit" class="login-button">Login</button>
+    
+            </div>
+        </div>
+        
+    </form>
+{% endblock content %}

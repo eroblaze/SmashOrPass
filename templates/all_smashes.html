@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}All Smashes{% endblock title %}
+
+{% block content %}
+
+{% if all_pic %} <!-- This means that if 'all_pic' isn't empty, display the form -->
+    <form action="/deleteall/" method="post">
+
+        {% csrf_token %}
+        <button class="deleteall" type="submit">DELETE ALL</button>
+
+    </form>
+{% else %}
+    <img class="broken" src="{% static 'broken.png' %}" alt="broken image">
+{% endif %}
+
+<div class="togetherhome">
+
+    {% for all in all_pic %}
+    {% block image %}
+    <div class="together">
+    
+        <img class="all_pictures" src="/static/{{ all.sub_pictures }}" alt="{{ all.sub_name }}" title="{{ all.sub_name }}">
+        <form action="/delete/{{ all.id }}/" method="post">
+            {% csrf_token %}
+            <button class="delbutton" type="submit">DELETE</button>
+        </form>
+    
+    </div>
+    
+    {% endblock image %}
+    {% endfor %}
+</div>
+{% endblock content %}

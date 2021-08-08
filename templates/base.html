@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            SOP base
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{% static 'base.css' %}" type="text/css">
+</head>
+<body>
+    <header>
+        {% if user.is_authenticated %}
+
+            <h1 class="sub-nav" >
+                <img class="arrow" src="{% static 'arrow.png' %}" alt="">
+                <span class="the_user">{{ user.username }}</span>
+                <ul>
+                    <li><a class="valid special" href="/smashes/">SMASHES</a></li>
+                    <li><a class="valid" href="/logout/">Logout</a></li>
+                </ul>
+            </h1>
+        
+        {% endif %}
+
+        <a href="/"><img class="homepic" src="{% static 'home.png' %}" alt=""></a>
+
+        <h1><div class="title"><span class="green">s m a s h</span> <span class="or">OR</span> <span class="red">p a s s</span></div>
+            {% if not user.is_authenticated %}
+            <img class="arrow2" src="{% static 'arrow.png' %}" alt="">
+            <ul>
+                <li><a class="valid" href="/login/">Login</a></li>
+                <li><a class="valid" href="/register/">Sign-up</a></li>
+            </ul>
+            {% endif %}
+        </h1>
+    </header>
+
+    
+    {% block content %}
+
+        <div class="picture">
+            {% block image %}
+                <img src="static/{{ the_object.pictures }}" alt="{{ the_object.name }}" title="{{ the_object.name }}">
+            {% endblock image %}
+        </div>
+        
+        <form action="/" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="s{{ the_object.id }}" value="smash" class="smash">Smash</button><!--I used that name inorder to get the current object or picture which was passed and is currently being displayed. I got this by using its ID-->
+            <button type="submit" name="p{{ the_object.id }}" value="pass" class="pass">Pass</button>
+        </form>
+    {% endblock content %}
+</body>
+</html>
