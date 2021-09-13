@@ -14,6 +14,10 @@ During the development of this project, I encountered a lot of issues and proble
 3. Html
 4. CSS.
 
-_**NOTE:** It is necessary for you to install the **"Pillow"** module before you can use this WebApp._
+**INSTALLATION**
+---
+
+Make sure you have all the dependencies inorder to run this website. To do that, simply run - 
+ `pip install -r requirements.txt`
 
 BUILT IN 7 DAYS. 😎😊
